@@ -7,23 +7,23 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/stac_vrt-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/stac_vrt-{{ version }}.tar.gz
   sha256: dc114961c3de51f5ed331c4f26e7618a8afed1da0c47bfb9135b0208db094c5e
 
 build:
-  number: 0
+  number: 1
   noarch: python
   script: {{ PYTHON }} -m flit install
 
 requirements:
   host:
     - flit
-    - python >=3.7
+    - python {{ python_min }}
   run:
     - affine
     - numpy
     - pyproj
-    - python >=3.7
+    - python >={{ python_min }}
     - rasterio
 
 test:
@@ -33,6 +33,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://pypi.org/project/stac_vrt/
